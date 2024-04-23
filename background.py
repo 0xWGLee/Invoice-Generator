@@ -1,3 +1,4 @@
+import os
 from random import randint
 from datetime import date
 from tkinter import *
@@ -7,6 +8,9 @@ from tkinter.ttk import *
 # Class to process all the behind the scenes
 class data():
     def __init__(self):
+        # Path to CSV file
+        self.path = './output.csv'
+
         # CHANGE THIS VALUE TO CHANGE TAX
         self.tax = 7
         
@@ -39,6 +43,28 @@ class data():
 
         # Collect the date
         self.date = date.today()
+
+    def save(self):
+        # Check if file exists
+        if not os.path.exists(self.path):
+            # If file does not exist create list of columns
+            columns = ['CUSTOMER NAME', 'CUSTOMER PHONE', 'CUSTOMER EMAIL', 'INVOICE NUMBER', 'DATE OF PURCHASE', 'SUBTOTAL', 'TAX AMOUNT', 'FINAL TOTAL']
+
+            # Open new file
+            with open(self.path, 'w') as f:
+                # Write columns as a header
+                f.write(','.join(columns))
+
+        # Add all the info to a list
+        columns = [self.name, self.contact_phone, self.contact_email, str(self.invoice_number), str(self.date), str(self.subtotal), str(self.tax_amount), str(self.final)]
+
+        # String to be added to file
+        writeable_data = '\n' + ','.join(columns)
+
+        # Open file
+        with open(self.path, 'a') as f:
+            # append data to files
+            f.write(writeable_data)
 
 # This class opens a new window that displays the final invoice
 class FinalWindow(Toplevel):
