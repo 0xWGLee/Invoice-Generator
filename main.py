@@ -41,6 +41,9 @@ def compute():
     # Calculate all the data in the background class
     d.calculate()
 
+    # Save all data to a csv file
+    d.save()
+
     # Call the new window from the another class
     background.FinalWindow(master=root, d=d)
 
@@ -50,7 +53,7 @@ d = background.data()
 # intialize GUI
 root = Tk()
 root.title('Invoice generator')
-root.resizable(False, False)
+root.minsize(250, 300)
 
 # Set a title label
 titlelabel = Label(root, text='Invoice generator')
