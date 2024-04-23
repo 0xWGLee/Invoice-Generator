@@ -40,12 +40,17 @@ class data():
         # Collect the date
         self.date = date.today()
 
+# This class opens a new window that displays the final invoice
 class FinalWindow(Toplevel):
     def __init__(self, d, master=None):
         super().__init__(master=master)
-        self.title('New Window')
+
+        # Set title for the invoice
+        self.title('Invoice Overview')
+        # Set the window size
         self.geometry("300x400")
 
+        # Create all the labels to display as a list
         labels = [
             "CUSTOMER INFO",
             "Customer name:   " + d.name, 
@@ -60,6 +65,7 @@ class FinalWindow(Toplevel):
             "Final Total      " + str(d.final),
         ]
 
+        # Loop through the list of all the labels
         for label in labels:
             Label(self, text=label).pack()
 
